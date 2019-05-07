@@ -1,7 +1,5 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage {
     private WebDriver driver;
@@ -27,4 +25,8 @@ public class MainPage {
     By mainMenuCategories = By.xpath("//div[@id='block-menu-menu-header-menu']//li");
     By catalogCategories = By.xpath("//ul[@class='shop-categories']/li");
 
+    public SignInPage goToSignInPage() {
+        driver.findElement(signInLink).click();
+        return new SignInPage(driver);
+    }
 }

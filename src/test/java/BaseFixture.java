@@ -7,12 +7,13 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseFixture {
 
-    static WebDriver driver;
+    static WebDriver driver = new ChromeDriver();
+    static WebDriverWait wait = (new WebDriverWait(driver, 15));
     static MainPage mainPage = new MainPage(driver);
+    static SignInPage signInPage = new SignInPage(driver);
 
     @BeforeClass
     public void setUp(){
-        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://tehni.ru/");
