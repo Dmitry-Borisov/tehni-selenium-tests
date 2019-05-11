@@ -29,4 +29,9 @@ public class MainPage {
         driver.findElement(signInLink).click();
         return new SignInPage(driver);
     }
+
+    public SignUpPage goToSignUpPage() {
+        driver.findElement(signUpLink).click();
+        return new SignUpPage(driver);
+    }
 }

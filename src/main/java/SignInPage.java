@@ -23,4 +23,12 @@ public class SignInPage {
         driver.findElement(btnSignIn).click();
     }
 
+    public void hideErrorMessage(){
+        driver.findElement(errorMessagesForm).click();
+    }
+
+    public void closeSignInModal(){
+        driver.findElement(modalClose).click();
+    }
+
 }

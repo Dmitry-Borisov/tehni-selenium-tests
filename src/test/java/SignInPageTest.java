@@ -25,7 +25,7 @@ public class SignInPageTest extends BaseFixture {
         if(! result.isSuccess()){
             TakesScreenshot screenshot = (TakesScreenshot)driver;
             File src = screenshot.getScreenshotAs(OutputType.FILE);
-            FileHandler.copy(src, new File("G:\\Arbeit\\tehniseleniumtests\\screenshots\\" + result.getName() + "-" + format.format(dateNow) + ".png"));
+            FileHandler.copy(src, new File("G:\\Arbeit\\github\\tehni-selenium-tests\\screenshots" + result.getName() + "-" + format.format(dateNow) + ".png"));
             System.out.println("Test failed. Get a screenshot");
         }
     }
@@ -79,5 +79,39 @@ public class SignInPageTest extends BaseFixture {
         s.assertTrue(driver.findElement(signInPage.errorMessagesForm).isDisplayed());
         WebElement errorForm = driver.findElement(signInPage.errorMessagesForm);
         s.assertTrue(wait.until(ExpectedConditions.stalenessOf(errorForm)));
+        signInPage.closeSignInModal();
+    }
+
+    @Test(priority = 10)
+    public void signInWithoutEmail(){
+        mainPage.goToSignInPage();
+        driver.findElement(signInPage.inputPass).sendKeys("123");
+        signInPage.submit();
+        String errorText = driver.findElement(signInPage.errorMessagesForm).getText();
+        Assert.assertTrue(errorText.contains("Поле E-mail обязательно для заполнения."));
+        signInPage.hideErrorMessage();
+        signInPage.closeSignInModal();
+    }
+
+    @Test(priority = 11)
+    public void signInWithoutPass(){
+        mainPage.goToSignInPage();
+        driver.findElement(signInPage.inputEmail).sendKeys("a@a.ru");
+        signInPage.submit();
+        String errorText = driver.findElement(signInPage.errorMessagesForm).getText();
+        Assert.assertTrue(errorText.contains("Поле Пароль обязательно для заполнения."));
+        signInPage.hideErrorMessage();
+        signInPage.closeSignInModal();
+    }
+
+    @Test(priority = 12)
+    public void linkInErrorMessageIsDisplayed(){
+        mainPage.goToSignInPage();
+        driver.findElement(signInPage.inputEmail).sendKeys("a@a.ru");
+        signInPage.submit();
+        WebElement link = driver.findElement(signInPage.linkToRestorePass);
+        Assert.assertNotNull(link);
+        signInPage.hideErrorMessage();
+        signInPage.closeSignInModal();
     }
 }

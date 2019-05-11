@@ -8,9 +8,10 @@ import java.util.concurrent.TimeUnit;
 public class BaseFixture {
 
     static WebDriver driver = new ChromeDriver();
-    static WebDriverWait wait = (new WebDriverWait(driver, 15));
+    static WebDriverWait wait = (new WebDriverWait(driver, 20));
     static MainPage mainPage = new MainPage(driver);
     static SignInPage signInPage = new SignInPage(driver);
+    static SignUpPage signUpPage = new SignUpPage(driver);
 
     @BeforeClass
     public void setUp(){
