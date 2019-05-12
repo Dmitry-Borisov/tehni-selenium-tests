@@ -1,4 +1,4 @@
-import org.junit.Assert;
+import org.testng.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
@@ -13,8 +13,22 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class SignInPageTest extends BaseFixture {
+public class Suite_2_SignInPageTest extends BaseFixture {
+
+    private static final Map<String, String> signInData;
+    static {
+        signInData = new HashMap();
+        signInData.put("email", "a@a.ru");
+        signInData.put("pass", "123");
+    };
+
+    private String[] errorMessages = {
+            "Поле E-mail обязательно для заполнения.",
+            "Поле Пароль обязательно для заполнения."
+    };
 
     Date dateNow = new Date();
     SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd-hh.mm.ss");
@@ -30,84 +44,85 @@ public class SignInPageTest extends BaseFixture {
         }
     }
 
-    @Test(priority = 1)
+    @Test(priority = 11)
     public void signInModalIsDisplayed(){
         mainPage.goToSignInPage();
         Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(signInPage.modalForm)).isDisplayed());
     }
 
-    @Test(priority = 2)
+    @Test(priority = 22)
     public void checkModalTitle(){
         wait.until(ExpectedConditions.textToBePresentInElementLocated(signInPage.modalTitle,"Войти"));
         String title = driver.findElement(signInPage.modalTitle).getText();
-        Assert.assertEquals("Войти", title);
+        Assert.assertEquals(title, "Войти");
     }
 
-    @Test(priority = 3)
+    @Test(priority = 23)
     public void modalCloseActionIsDisplayed(){
         Assert.assertTrue(driver.findElement(signInPage.modalClose).isDisplayed());
     }
 
-    @Test(priority = 4)
+    @Test(priority = 24)
     public void inputEmailIsDisplayed(){
         Assert.assertTrue(driver.findElement(signInPage.inputEmail).isDisplayed());
     }
 
-    @Test(priority = 5)
+    @Test(priority = 25)
     public void inputPassIsDisplayed(){
         Assert.assertTrue(driver.findElement(signInPage.inputPass).isDisplayed());
     }
 
-    @Test(priority = 6)
+    @Test(priority = 26)
     public void signInBtnIsDisplayed(){
         Assert.assertTrue(driver.findElement(signInPage.btnSignIn).isDisplayed());
     }
 
-    @Test(priority = 7)
+    @Test(priority = 27)
     public void linkToRegistrationIsDisplayed(){
         Assert.assertTrue(driver.findElement(signInPage.linkToRegistration).isDisplayed());
     }
 
-    @Test(priority = 8)
+    @Test(priority = 28)
     public void linkForgotPassIsDisplayed(){
         Assert.assertTrue(driver.findElement(signInPage.linkForgotPass).isDisplayed());
     }
 
-    @Test(priority = 9)
+    @Test(priority = 29)
     public void signInWithoutData(){
         signInPage.submit();
         s.assertTrue(driver.findElement(signInPage.errorMessagesForm).isDisplayed());
         WebElement errorForm = driver.findElement(signInPage.errorMessagesForm);
         s.assertTrue(wait.until(ExpectedConditions.stalenessOf(errorForm)));
+        s.assertAll();
         signInPage.closeSignInModal();
     }
 
-    @Test(priority = 10)
+    @Test(priority = 30)
     public void signInWithoutEmail(){
         mainPage.goToSignInPage();
-        driver.findElement(signInPage.inputPass).sendKeys("123");
+        driver.findElement(signInPage.inputPass).sendKeys(signInData.get("pass"));
         signInPage.submit();
         String errorText = driver.findElement(signInPage.errorMessagesForm).getText();
-        Assert.assertTrue(errorText.contains("Поле E-mail обязательно для заполнения."));
+        Assert.assertTrue(errorText.contains(errorMessages[0]));
         signInPage.hideErrorMessage();
         signInPage.closeSignInModal();
     }
 
-    @Test(priority = 11)
+    @Test(priority = 31)
     public void signInWithoutPass(){
         mainPage.goToSignInPage();
-        driver.findElement(signInPage.inputEmail).sendKeys("a@a.ru");
+        driver.findElement(signInPage.inputEmail).sendKeys(signInData.get("email"));
         signInPage.submit();
         String errorText = driver.findElement(signInPage.errorMessagesForm).getText();
-        Assert.assertTrue(errorText.contains("Поле Пароль обязательно для заполнения."));
+        Assert.assertTrue(errorText.contains(errorMessages[1]));
         signInPage.hideErrorMessage();
         signInPage.closeSignInModal();
     }
 
-    @Test(priority = 12)
+    @Test(priority = 32)
     public void linkInErrorMessageIsDisplayed(){
         mainPage.goToSignInPage();
-        driver.findElement(signInPage.inputEmail).sendKeys("a@a.ru");
+        driver.findElement(signInPage.inputEmail).sendKeys(signInData.get("email"));
         signInPage.submit();
         WebElement link = driver.findElement(signInPage.linkToRestorePass);
         Assert.assertNotNull(link);

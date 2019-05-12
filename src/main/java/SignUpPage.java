@@ -18,6 +18,7 @@ public class SignUpPage {
     By inputCaptcha = By.xpath("//input[@id='edit-captcha-response']");
     By imgCaptcha = By.xpath("//div[@class='captcha']/img");
     By errorMessagesForm = By.xpath("//div[@class='messages error processed']");
+    By ofertaPageLink = By.xpath("//div[@class='form-actions form-wrapper']/descendant::a");
 
     public void submit() {
         driver.findElement(btnSignUp).click();
@@ -29,5 +30,10 @@ public class SignUpPage {
 
     public void closeSignUpModal(){
         driver.findElement(modalClose).click();
+    }
+
+    public OfertaPage goToOfertaPage() {
+        driver.findElement(ofertaPageLink).click();
+        return new OfertaPage(driver);
     }
 }

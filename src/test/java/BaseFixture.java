@@ -7,17 +7,26 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseFixture {
 
-    static WebDriver driver = new ChromeDriver();
-    static WebDriverWait wait = (new WebDriverWait(driver, 20));
-    static MainPage mainPage = new MainPage(driver);
-    static SignInPage signInPage = new SignInPage(driver);
-    static SignUpPage signUpPage = new SignUpPage(driver);
+    static WebDriver driver;
+    static WebDriverWait wait;
+    static MainPage mainPage;
+    static SignInPage signInPage;
+    static SignUpPage signUpPage;
+    static OfertaPage ofertaPage;
+    static String firstTab;
 
     @BeforeClass
     public void setUp(){
+        driver = new ChromeDriver();
+        wait = (new WebDriverWait(driver, 20));
+        mainPage = new MainPage(driver);
+        signInPage = new SignInPage(driver);
+        signUpPage = new SignUpPage(driver);
+        ofertaPage = new OfertaPage(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://tehni.ru/");
+        firstTab = getCurrentTabName();
     }
 
     @AfterClass
@@ -25,5 +34,15 @@ public class BaseFixture {
         if(driver != null){
             driver.quit();
         }
+    }
+
+    public static String getCurrentTabName(){
+        return (driver.getWindowHandle());
+    }
+
+    public static void switchToNextTab(){
+        for (String tab : driver.getWindowHandles()){
+            driver.switchTo().window(tab);
+        };
     }
 }

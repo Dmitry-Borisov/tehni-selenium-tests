@@ -1,4 +1,4 @@
-import org.junit.Assert;
+import org.testng.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class MainPageTest extends BaseFixture {
+public class Suite_1_MainPageTest extends BaseFixture {
     Date dateNow = new Date();
     SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd-hh.mm.ss");
     SoftAssert s = new SoftAssert();
@@ -37,7 +37,7 @@ public class MainPageTest extends BaseFixture {
     @Test(priority = 2)
     public void companyPhoneIsDisplayed(){
         String number = driver.findElement(mainPage.companyPhone).getText();
-        Assert.assertEquals("+7 (3822) 435-200", number);
+        Assert.assertEquals(number, "+7 (3822) 435-200");
     }
 
     @Test(priority = 3)
@@ -48,7 +48,7 @@ public class MainPageTest extends BaseFixture {
     @Test(priority = 4)
     public void workTimeIsDisplayed(){
         String time = driver.findElement(mainPage.workTime).getText();
-        Assert.assertEquals("с 10:00 до 20:00. Без выходных", time);
+        Assert.assertEquals(time, "с 10:00 до 20:00. Без выходных");
     }
 
     @Test(priority = 5)
@@ -79,19 +79,20 @@ public class MainPageTest extends BaseFixture {
     @Test(priority = 10)
     public void checkNumberTopMenuItems(){
         int menuSize = driver.findElements(mainPage.topMenu).size();
-        Assert.assertEquals(7, menuSize);
+        Assert.assertEquals(menuSize, 7);
     }
 
     @Test(priority = 11)
     public void checkTopMenuItemsName(){
         List<WebElement> list = driver.findElements(mainPage.topMenu);
-        s.assertEquals("О нас", list.get(0).getText());
-        s.assertEquals("Доставка", list.get(1).getText());
-        s.assertEquals("Оплата", list.get(2).getText());
-        s.assertEquals("Кредит/Рассрочка", list.get(3).getText());
-        s.assertEquals("Контакты", list.get(4).getText());
-        s.assertEquals("Покупатели", list.get(5).getText());
-        s.assertEquals("Помощь", list.get(6).getText());
+        s.assertEquals(list.get(0).getText(), "О нас");
+        s.assertEquals(list.get(1).getText(), "Доставка");
+        s.assertEquals(list.get(2).getText(),"Оплата");
+        s.assertEquals(list.get(3).getText(), "Кредит/Рассрочка");
+        s.assertEquals(list.get(4).getText(), "Контакты");
+        s.assertEquals(list.get(5).getText(), "Покупатели");
+        s.assertEquals( list.get(6).getText(), "Помощь");
+        s.assertAll();
     }
 
     @Test(priority = 12)
@@ -117,16 +118,17 @@ public class MainPageTest extends BaseFixture {
     @Test(priority = 16)
     public void checkNumberMainMenuCategoriesItems(){
         int menuSize = driver.findElements(mainPage.mainMenuCategories).size();
-        Assert.assertEquals(4, menuSize);
+        Assert.assertEquals(menuSize, 4);
     }
 
     @Test(priority = 17)
     public void checkMainMenuCategoriesItemsName(){
         List<WebElement> list = driver.findElements(mainPage.mainMenuCategories);
-        s.assertEquals("Распродажа", list.get(0).getText());
-        s.assertEquals("Акции", list.get(1).getText());
-        s.assertEquals("Отзывы", list.get(2).getText());
-        s.assertEquals("О Техни.ру ", list.get(3).getText());
+        s.assertEquals(list.get(0).getText(), "Распродажа");
+        s.assertEquals(list.get(1).getText(), "Акции");
+        s.assertEquals(list.get(2).getText(), "Отзывы");
+        s.assertEquals( list.get(3).getText(), "О Техни.ру");
+        s.assertAll();
     }
 
     @Test(priority = 18)
@@ -137,17 +139,18 @@ public class MainPageTest extends BaseFixture {
     @Test(priority = 19)
     public void checkNumberCatalogCategoriesItems(){
         int menuSize = driver.findElements(mainPage.catalogCategories).size();
-        Assert.assertEquals(6, menuSize);
+        Assert.assertEquals(menuSize, 6);
     }
 
     @Test(priority = 20)
     public void checkCatalogCategoriesItemsName(){
-        List<WebElement> list = driver.findElements(mainPage.mainMenuCategories);
-        s.assertEquals("Крупная и встраиваемая техника", list.get(0).getText());
-        s.assertEquals("Техника для кухни", list.get(1).getText());
-        s.assertEquals("Техника для дома", list.get(2).getText());
-        s.assertEquals("Климатическая техника", list.get(3).getText());
-        s.assertEquals("Распродажа остатков", list.get(2).getText());
-        s.assertEquals("Уцененные товары", list.get(3).getText());
+        List<WebElement> list = driver.findElements(mainPage.catalogCategories);
+        s.assertEquals(list.get(0).getText(), "Крупная и встраиваемая техника");
+        s.assertEquals(list.get(1).getText(),"Техника для кухни");
+        s.assertEquals(list.get(2).getText(),"Техника для дома");
+        s.assertEquals(list.get(3).getText(),"Климатическая техника");
+        s.assertEquals(list.get(4).getText(),"Распродажа остатков");
+        s.assertEquals(list.get(5).getText(),"Уцененные товары");
+        s.assertAll();
     }
 }
