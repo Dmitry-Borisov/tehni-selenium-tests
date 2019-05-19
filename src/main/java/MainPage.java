@@ -23,8 +23,8 @@ public class MainPage {
     By searchBtn = By.xpath("//div[@id='block-search-form']//input[@id='edit-submit']");
     By catalogLink = By.xpath("//a[@id='catalog-link']");
     By mainMenuCategories = By.xpath("//div[@id='block-menu-menu-header-menu']//li");
-//    By catalogCategories = By.xpath("//ul[@class='shop-categories']/li");
     By catalogCategories = By.xpath("//ul[@class='shop-categories']/li/descendant::a/div/parent::a");
+    By linkToFridges = By.xpath("//div[@class='category-title']/a[text()='Холодильники']");
 
     public SignInPage goToSignInPage() {
         driver.findElement(signInLink).click();
@@ -34,5 +34,9 @@ public class MainPage {
     public SignUpPage goToSignUpPage() {
         driver.findElement(signUpLink).click();
         return new SignUpPage(driver);
+    }
+
+    public String getGoodsNumber(){
+        return (driver.findElement(goodsNumber).getText());
     }
 }

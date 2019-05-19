@@ -23,7 +23,7 @@ public class Suite_4_OfertaPageTest extends BaseFixture{
         if(! result.isSuccess()){
             TakesScreenshot screenshot = (TakesScreenshot)driver;
             File src = screenshot.getScreenshotAs(OutputType.FILE);
-            FileHandler.copy(src, new File("G:\\Arbeit\\github\\tehni-selenium-tests\\screenshots" + result.getName() + "-" + format.format(dateNow) + ".png"));
+            FileHandler.copy(src, new File("G:\\Arbeit\\github\\tehni-selenium-tests\\screenshots\\" + result.getName() + "-" + format.format(dateNow) + ".png"));
             System.out.println("Test failed. Get a screenshot");
         }
     }

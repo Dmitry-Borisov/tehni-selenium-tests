@@ -13,6 +13,7 @@ public class BaseFixture {
     static SignInPage signInPage;
     static SignUpPage signUpPage;
     static OfertaPage ofertaPage;
+    static ProductFridgesPage productFridgesPage;
     static String firstTab;
 
     @BeforeClass
@@ -23,6 +24,7 @@ public class BaseFixture {
         signInPage = new SignInPage(driver);
         signUpPage = new SignUpPage(driver);
         ofertaPage = new OfertaPage(driver);
+        productFridgesPage = new ProductFridgesPage(driver);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get("http://tehni.ru/");

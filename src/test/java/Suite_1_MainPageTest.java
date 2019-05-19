@@ -24,8 +24,8 @@ public class Suite_1_MainPageTest extends BaseFixture {
         if(! result.isSuccess()){
             TakesScreenshot screenshot = (TakesScreenshot)driver;
             File src = screenshot.getScreenshotAs(OutputType.FILE);
-            FileHandler.copy(src, new File("G:\\Arbeit\\github\\tehni-selenium-tests\\screenshots" + result.getName() + "-" + format.format(dateNow) + ".png"));
-            System.out.println("Test failed. Get a screenshot");
+            FileHandler.copy(src, new File("G:\\Arbeit\\github\\tehni-selenium-tests\\screenshots\\" + result.getName() + "-" + format.format(dateNow) + ".png"));
+            System.out.println("Test failed! Get a screenshot");
         }
     }
 
@@ -85,13 +85,13 @@ public class Suite_1_MainPageTest extends BaseFixture {
     @Test(priority = 11)
     public void checkTopMenuItemsName(){
         List<WebElement> list = driver.findElements(mainPage.topMenu);
-        s.assertEquals(list.get(0).getText(), "О нас");
-        s.assertEquals(list.get(1).getText(), "Доставка");
+        s.assertEquals(list.get(0).getText(),"О нас");
+        s.assertEquals(list.get(1).getText(),"Доставка");
         s.assertEquals(list.get(2).getText(),"Оплата");
-        s.assertEquals(list.get(3).getText(), "Кредит/Рассрочка");
-        s.assertEquals(list.get(4).getText(), "Контакты");
-        s.assertEquals(list.get(5).getText(), "Покупатели");
-        s.assertEquals( list.get(6).getText(), "Помощь");
+        s.assertEquals(list.get(3).getText(),"Кредит/Рассрочка");
+        s.assertEquals(list.get(4).getText(),"Контакты");
+        s.assertEquals(list.get(5).getText(),"Покупатели");
+        s.assertEquals( list.get(6).getText(),"Помощь");
         s.assertAll();
     }
 
@@ -124,10 +124,10 @@ public class Suite_1_MainPageTest extends BaseFixture {
     @Test(priority = 17)
     public void checkMainMenuCategoriesItemsName(){
         List<WebElement> list = driver.findElements(mainPage.mainMenuCategories);
-        s.assertEquals(list.get(0).getText(), "Распродажа");
-        s.assertEquals(list.get(1).getText(), "Акции");
-        s.assertEquals(list.get(2).getText(), "Отзывы");
-        s.assertEquals( list.get(3).getText(), "О Техни.ру");
+        s.assertEquals(list.get(0).getText(),"Распродажа");
+        s.assertEquals(list.get(1).getText(),"Акции");
+        s.assertEquals(list.get(2).getText(),"Отзывы");
+        s.assertEquals( list.get(3).getText(),"О Техни.ру");
         s.assertAll();
     }
 
@@ -145,7 +145,7 @@ public class Suite_1_MainPageTest extends BaseFixture {
     @Test(priority = 20)
     public void checkCatalogCategoriesItemsName(){
         List<WebElement> list = driver.findElements(mainPage.catalogCategories);
-        s.assertEquals(list.get(0).getText(), "Крупная и встраиваемая техника");
+        s.assertEquals(list.get(0).getText(),"Крупная и встраиваемая техника");
         s.assertEquals(list.get(1).getText(),"Техника для кухни");
         s.assertEquals(list.get(2).getText(),"Техника для дома");
         s.assertEquals(list.get(3).getText(),"Климатическая техника");

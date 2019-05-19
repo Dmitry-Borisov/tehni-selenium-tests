@@ -10,14 +10,4 @@ public class OfertaPage {
     By phoneInFooter = By.xpath("//div[@class='region region-footer']/descendant::strong/span");
     By bottomTopButton = By.xpath("//a[@id='bottom-top-button']");
     By titleContent = By.xpath("//h1[text()='Публичный Договор-оферта']");
-
-    public String getCurrentTabName(){
-        return (driver.getWindowHandle());
-    }
-
-    public void switchToNextTab(){
-        for (String tab : driver.getWindowHandles()){
-            driver.switchTo().window(tab);
-        };
-    }
 }
