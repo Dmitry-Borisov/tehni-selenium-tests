@@ -27,6 +27,13 @@ public class ProductFridgesPage {
     By emptyMessage = By.xpath("//div[@class='shop-cart-empty']");
     By evenString = By.xpath("//tbody/tr[@class='even']");
 
+    public final String URL = "http://tehni.ru/catalog/holodilniki";
+    public final String SILVER_COLOR = "серебристый ";
+    public final String TITLE = "Корзина | Техни.ру";
+    public final String DELIVERY_ADDRESS = "Самовывоз, ул. Тверская, 81";
+    public final String NOTICE = "Осмотр и вынос техники осуществляется самостоятельно.";
+    public final String MESSAGE = "Ваша корзина пуста.";
+
     public void toFind(){
         driver.findElement(findBtn).click();
     }
@@ -58,3 +65,4 @@ public class ProductFridgesPage {
         btns.get(numBtn).click();
     }
 }
+  

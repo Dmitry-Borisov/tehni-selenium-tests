@@ -13,24 +13,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Suite_2_SignInPageTest extends BaseFixture {
 
-    private static final Map<String, String> signInData;
-    static {
-        signInData = new HashMap();
-        signInData.put("email", "a@a.ru");
-        signInData.put("pass", "123");
-    };
-
-    private String[] errorMessages = {
-            "Поле E-mail обязательно для заполнения.",
-            "Поле Пароль обязательно для заполнения."
-    };
-
-    Date dateNow = new Date();
+    private Date dateNow = new Date();
     SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd-hh.mm.ss");
     SoftAssert s = new SoftAssert();
 
@@ -100,10 +86,10 @@ public class Suite_2_SignInPageTest extends BaseFixture {
     @Test(priority = 30)
     public void signInWithoutEmail(){
         mainPage.goToSignInPage();
-        driver.findElement(signInPage.inputPass).sendKeys(signInData.get("pass"));
+        driver.findElement(signInPage.inputPass).sendKeys(signInPage.signInData.get("pass"));
         signInPage.submit();
         String errorText = driver.findElement(signInPage.errorMessagesForm).getText();
-        Assert.assertTrue(errorText.contains(errorMessages[0]));
+        Assert.assertTrue(errorText.contains(signInPage.errorMessages[0]));
         signInPage.hideErrorMessage();
         signInPage.closeSignInModal();
     }
@@ -111,10 +97,10 @@ public class Suite_2_SignInPageTest extends BaseFixture {
     @Test(priority = 31)
     public void signInWithoutPass(){
         mainPage.goToSignInPage();
-        driver.findElement(signInPage.inputEmail).sendKeys(signInData.get("email"));
+        driver.findElement(signInPage.inputEmail).sendKeys(signInPage.signInData.get("email"));
         signInPage.submit();
         String errorText = driver.findElement(signInPage.errorMessagesForm).getText();
-        Assert.assertTrue(errorText.contains(errorMessages[1]));
+        Assert.assertTrue(errorText.contains(signInPage.errorMessages[1]));
         signInPage.hideErrorMessage();
         signInPage.closeSignInModal();
     }
@@ -122,7 +108,7 @@ public class Suite_2_SignInPageTest extends BaseFixture {
     @Test(priority = 32)
     public void linkInErrorMessageIsDisplayed(){
         mainPage.goToSignInPage();
-        driver.findElement(signInPage.inputEmail).sendKeys(signInData.get("email"));
+        driver.findElement(signInPage.inputEmail).sendKeys(signInPage.signInData.get("email"));
         signInPage.submit();
         WebElement link = driver.findElement(signInPage.linkToRestorePass);
         Assert.assertNotNull(link);

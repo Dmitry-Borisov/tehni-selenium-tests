@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Suite_1_MainPageTest extends BaseFixture {
-    Date dateNow = new Date();
+    private Date dateNow = new Date();
     SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd-hh.mm.ss");
     SoftAssert s = new SoftAssert();
 
@@ -37,7 +37,7 @@ public class Suite_1_MainPageTest extends BaseFixture {
     @Test(priority = 2)
     public void companyPhoneIsDisplayed(){
         String number = driver.findElement(mainPage.companyPhone).getText();
-        Assert.assertEquals(number, "+7 (3822) 435-200");
+        Assert.assertEquals(number, mainPage.PHONE);
     }
 
     @Test(priority = 3)
@@ -48,7 +48,7 @@ public class Suite_1_MainPageTest extends BaseFixture {
     @Test(priority = 4)
     public void workTimeIsDisplayed(){
         String time = driver.findElement(mainPage.workTime).getText();
-        Assert.assertEquals(time, "с 10:00 до 20:00. Без выходных");
+        Assert.assertEquals(time, mainPage.WORK_TIME);
     }
 
     @Test(priority = 5)

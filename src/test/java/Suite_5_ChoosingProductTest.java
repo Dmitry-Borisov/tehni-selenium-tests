@@ -16,8 +16,8 @@ import java.util.List;
 
 public class Suite_5_ChoosingProductTest extends BaseFixture {
 
-    Date dateNow = new Date();
-    SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd-hh.mm.ss");
+    private Date dateNow = new Date();
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd-hh.mm.ss");
 
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
@@ -34,7 +34,7 @@ public class Suite_5_ChoosingProductTest extends BaseFixture {
         driver.findElement(mainPage.linkToFridges).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(productFridgesPage.findBtn));
         String url = driver.getCurrentUrl();
-        Assert.assertEquals(url, "http://tehni.ru/catalog/holodilniki");
+        Assert.assertEquals(url, productFridgesPage.URL);
     }
 
     @Test(priority = 51)
@@ -64,7 +64,7 @@ public class Suite_5_ChoosingProductTest extends BaseFixture {
     @Test(priority = 54)
     public void findSilverFridges() {
         productFridgesPage.scrollToSideBlockMenu(4);
-        productFridgesPage.chooseFridgesByColor("серебристый ");
+        productFridgesPage.chooseFridgesByColor(productFridgesPage.SILVER_COLOR);
         productFridgesPage.toFind();
         wait.until(ExpectedConditions.visibilityOfElementLocated(productFridgesPage.filterColor));
         Assert.assertTrue(driver.findElement(productFridgesPage.filterColor).isDisplayed());
@@ -94,7 +94,7 @@ public class Suite_5_ChoosingProductTest extends BaseFixture {
     public void goToBasket() {
         driver.findElement(mainPage.basketLink).click();
         String title = driver.getTitle();
-        Assert.assertEquals(title, "Корзина | Техни.ру");
+        Assert.assertEquals(title, productFridgesPage.TITLE);
     }
 
     @Test(priority = 58)
@@ -114,15 +114,15 @@ public class Suite_5_ChoosingProductTest extends BaseFixture {
 
     @Test(priority = 60)
     public void chooseDeliveryAddress() {
-        productFridgesPage.chooseDeliveryOption("Самовывоз, ул. Тверская, 81");
+        productFridgesPage.chooseDeliveryOption(productFridgesPage.DELIVERY_ADDRESS);
         String notice = driver.findElement(productFridgesPage.deliveryNotice).getText();
-        Assert.assertEquals(notice, "Осмотр и вынос техники осуществляется самостоятельно.");
+        Assert.assertEquals(notice, productFridgesPage.NOTICE);
     }
 
     @Test(priority = 61)
     public void clearBasket() {
         productFridgesPage.deleteGoods(0);
         String message = driver.findElement(productFridgesPage.emptyMessage).getText();
-        Assert.assertEquals(message, "Ваша корзина пуста.");
+        Assert.assertEquals(message, productFridgesPage.MESSAGE);
     }
 }

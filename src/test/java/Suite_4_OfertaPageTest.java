@@ -15,7 +15,7 @@ import java.util.Date;
 
 public class Suite_4_OfertaPageTest extends BaseFixture{
 
-    Date dateNow = new Date();
+    private Date dateNow = new Date();
     SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd-hh.mm.ss");
 
     @AfterMethod
@@ -36,7 +36,7 @@ public class Suite_4_OfertaPageTest extends BaseFixture{
         switchToNextTab();
         wait.until(ExpectedConditions.visibilityOfElementLocated(ofertaPage.titleContent));
         String url = driver. getCurrentUrl();
-        Assert.assertEquals(url, "http://tehni.ru/oferta");
+        Assert.assertEquals(url, ofertaPage.OFERTA_PAGE);
     }
 
     @Test(priority = 48)
@@ -44,7 +44,7 @@ public class Suite_4_OfertaPageTest extends BaseFixture{
         JavascriptExecutor jse = (JavascriptExecutor)driver;
         jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         String phoneNumber = driver.findElement(ofertaPage.phoneInFooter).getText();
-        Assert.assertEquals(phoneNumber, "Звоните по телефону: 663-500!");
+        Assert.assertEquals(phoneNumber, ofertaPage.PHONE);
         driver.findElement(ofertaPage.bottomTopButton).click();
     }
 
@@ -53,7 +53,7 @@ public class Suite_4_OfertaPageTest extends BaseFixture{
         driver.switchTo().window(firstTab);
         wait.until(ExpectedConditions.visibilityOfElementLocated(signUpPage.modalTitle));
         String url = driver. getCurrentUrl();
-        Assert.assertEquals(url, "http://tehni.ru/");
+        Assert.assertEquals(url, ofertaPage.HOME_PAGE);
     }
 }
 

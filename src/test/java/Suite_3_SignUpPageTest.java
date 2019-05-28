@@ -13,29 +13,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Suite_3_SignUpPageTest extends BaseFixture{
 
-    private static final Map<String, String> signUpData;
-    static {
-        signUpData = new HashMap();
-        signUpData.put("name", "Ivan");
-        signUpData.put("email", "q@q.com");
-        signUpData.put("pass", "123");
-        signUpData.put("captcha", "000a");
-    };
-
-    private String[] errorMessages = {
-            "Поле Имя обязательно для заполнения.",
-            "Поле E-mail обязательно для заполнения.",
-            "Поле Пароль обязательно для заполнения.",
-            "Поле Какой код на картинке? обязательно для заполнения.",
-            "Вы ввели неправильный ответ на контрольный вопрос."
-    };
-
-    Date dateNow = new Date();
+    private Date dateNow = new Date();
     SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd-hh.mm.ss");
     SoftAssert s = new SoftAssert();
 
@@ -100,8 +81,8 @@ public class Suite_3_SignUpPageTest extends BaseFixture{
     @Test(priority = 42)
     public void signUpWithoutData(){
         signUpPage.submit();
-        s.assertTrue(driver.findElement(signInPage.errorMessagesForm).isDisplayed());
-        WebElement errorForm = driver.findElement(signInPage.errorMessagesForm);
+        s.assertTrue(driver.findElement(signUpPage.errorMessagesForm).isDisplayed());
+        WebElement errorForm = driver.findElement(signUpPage.errorMessagesForm);
         s.assertTrue(wait.until(ExpectedConditions.stalenessOf(errorForm)));
         s.assertAll();
         signUpPage.closeSignUpModal();
@@ -110,13 +91,13 @@ public class Suite_3_SignUpPageTest extends BaseFixture{
     @Test(priority = 43)
     public void signUpOnlyWithName(){
         mainPage.goToSignUpPage();
-        driver.findElement(signUpPage.inputName).sendKeys(signUpData.get("name"));
+        driver.findElement(signUpPage.inputName).sendKeys(signUpPage.signUpData.get("name"));
         signUpPage.submit();
 
         String errorText = driver.findElement(signUpPage.errorMessagesForm).getText();
-        s.assertTrue(errorText.contains(errorMessages[1]));
-        s.assertTrue(errorText.contains(errorMessages[2]));
-        s.assertTrue(errorText.contains(errorMessages[3]));
+        s.assertTrue(errorText.contains(signUpPage.errorMessages[1]));
+        s.assertTrue(errorText.contains(signUpPage.errorMessages[2]));
+        s.assertTrue(errorText.contains(signUpPage.errorMessages[3]));
         s.assertAll();
         signUpPage.hideErrorMessage();
         signUpPage.closeSignUpModal();
@@ -125,13 +106,13 @@ public class Suite_3_SignUpPageTest extends BaseFixture{
     @Test(priority = 44)
     public void signUpOnlyWithEmail(){
         mainPage.goToSignUpPage();
-        driver.findElement(signUpPage.inputEmail).sendKeys(signUpData.get("email"));
+        driver.findElement(signUpPage.inputEmail).sendKeys(signUpPage.signUpData.get("email"));
         signUpPage.submit();
 
         String errorText = driver.findElement(signUpPage.errorMessagesForm).getText();
-        s.assertTrue(errorText.contains(errorMessages[0]));
-        s.assertTrue(errorText.contains(errorMessages[2]));
-        s.assertTrue(errorText.contains(errorMessages[3]));
+        s.assertTrue(errorText.contains(signUpPage.errorMessages[0]));
+        s.assertTrue(errorText.contains(signUpPage.errorMessages[2]));
+        s.assertTrue(errorText.contains(signUpPage.errorMessages[3]));
         s.assertAll();
         signUpPage.hideErrorMessage();
         signUpPage.closeSignUpModal();
@@ -140,13 +121,13 @@ public class Suite_3_SignUpPageTest extends BaseFixture{
     @Test(priority = 45)
     public void signUpOnlyWithPass(){
         mainPage.goToSignUpPage();
-        driver.findElement(signUpPage.inputPass).sendKeys(signUpData.get("pass"));
+        driver.findElement(signUpPage.inputPass).sendKeys(signUpPage.signUpData.get("pass"));
         signUpPage.submit();
 
         String errorText = driver.findElement(signUpPage.errorMessagesForm).getText();
-        s.assertTrue(errorText.contains(errorMessages[0]));
-        s.assertTrue(errorText.contains(errorMessages[1]));
-        s.assertTrue(errorText.contains(errorMessages[3]));
+        s.assertTrue(errorText.contains(signUpPage.errorMessages[0]));
+        s.assertTrue(errorText.contains(signUpPage.errorMessages[1]));
+        s.assertTrue(errorText.contains(signUpPage.errorMessages[3]));
         s.assertAll();
         signUpPage.hideErrorMessage();
         signUpPage.closeSignUpModal();
@@ -155,14 +136,14 @@ public class Suite_3_SignUpPageTest extends BaseFixture{
     @Test(priority = 46)
     public void signUpWithIncorrectCaptcha(){
         mainPage.goToSignUpPage();
-        driver.findElement(signUpPage.inputName).sendKeys(signUpData.get("name"));
-        driver.findElement(signUpPage.inputEmail).sendKeys(signUpData.get("email"));
-        driver.findElement(signUpPage.inputPass).sendKeys(signUpData.get("pass"));
-        driver.findElement(signUpPage.inputCaptcha).sendKeys(signUpData.get("captcha"));
+        driver.findElement(signUpPage.inputName).sendKeys(signUpPage.signUpData.get("name"));
+        driver.findElement(signUpPage.inputEmail).sendKeys(signUpPage.signUpData.get("email"));
+        driver.findElement(signUpPage.inputPass).sendKeys(signUpPage.signUpData.get("pass"));
+        driver.findElement(signUpPage.inputCaptcha).sendKeys(signUpPage.signUpData.get("captcha"));
         signUpPage.submit();
 
         String errorText = driver.findElement(signUpPage.errorMessagesForm).getText();
-        Assert.assertTrue(errorText.contains(errorMessages[4]));
+        Assert.assertTrue(errorText.contains(signUpPage.errorMessages[4]));
         signUpPage.hideErrorMessage();
         signUpPage.closeSignUpModal();
     }

@@ -1,6 +1,9 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SignInPage {
     private WebDriver driver;
 
@@ -18,6 +21,18 @@ public class SignInPage {
     By linkToRestorePass = By.xpath("//div[@class='messages error processed']//li/a");
     By linkToRegistration = By.xpath("//ul[@class='ajax-register-links inline']/li[@class='first']");
     By linkForgotPass = By.xpath("//ul[@class='ajax-register-links inline']/li[@class='last']");
+
+    public static final Map<String, String> signInData;
+    static {
+        signInData = new HashMap();
+        signInData.put("email", "a@a.ru");
+        signInData.put("pass", "123");
+    };
+
+    public String[] errorMessages = {
+            "Поле E-mail обязательно для заполнения.",
+            "Поле Пароль обязательно для заполнения."
+    };
 
     public void submit() {
         driver.findElement(btnSignIn).click();

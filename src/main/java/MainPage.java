@@ -26,6 +26,10 @@ public class MainPage {
     By catalogCategories = By.xpath("//ul[@class='shop-categories']/li/descendant::a/div/parent::a");
     By linkToFridges = By.xpath("//div[@class='category-title']/a[text()='Холодильники']");
 
+    public final String PHONE = "+7 (3822) 435-200";
+    public final String WORK_TIME = "с 10:00 до 20:00. Без выходных";
+
+
     public SignInPage goToSignInPage() {
         driver.findElement(signInLink).click();
         return new SignInPage(driver);
